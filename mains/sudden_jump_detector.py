@@ -1,11 +1,10 @@
 from mains.historical_data import get_historical_data
-from mains.coin_list import get_coin_names_array, get_cryptocurrency_list_bittrex
+from mains.coin_list import get_coin_names_array, get_cryptocurrency_list_bittrex,get_cryptocurrency_active_list_bittrex
 from utils.utils_date_time import get_curr_epoch, get_date_from_epoch, DATE_FORMAT
 from utils.utils_tables import print_readable_table
 from utils.utils_print import print_date_array_from_epochs, print_sudden_jump_results, print_sorted_list
 from utils.utils_file import mark_end_of_failed_coin
-from utils.utils_sudden_jumps import get_dict_of_ratio_high_low
-
+from utils.utils_sudden_jumps import get_dict_of_ratio_high_low, sort_dict_results_by_amount_of_occcurs
 class Sudden_jump_detector:
     DEFAULT_COIN_ARRAY = ['BTC','LTC','DMD','LSK']
     DEFAULT_COIN_TO = 'USD'
@@ -14,17 +13,31 @@ class Sudden_jump_detector:
     DEFAULT_INTERVAL = 'D'
     DEFAULT_THRESHOLD = 2.0
 
+    coin_array = DEFAULT_COIN_ARRAY,
+    coin_to = DEFAULT_COIN_TO,
+    date_from = DEFAULT_DATE_FROM,
+    date_to = DEFAULT_DATE_TO,
+    interval = DEFAULT_INTERVAL,
+    threshold = DEFAULT_THRESHOLD
+
+    sudden_jump_dict = {}
+    sorted_list = []
+
     def __init__(self,
                  coin_array =DEFAULT_COIN_ARRAY,
-                 coint_to   =DEFAULT_COIN_TO,
+                 coin_to   =DEFAULT_COIN_TO,
                  date_from  =DEFAULT_DATE_FROM,
                  date_to    =DEFAULT_DATE_TO,
-                 interval   =
+                 interval   =DEFAULT_INTERVAL,
+                 threshold  =DEFAULT_THRESHOLD
                  ):
-        self.get_suddent_jump_results()
+        print("araj: {}".format(coin_array))
+        self.sudden_jump_dict = self.get_suddent_jump_results(coin_array,coin_to,date_from,date_to,interval,threshold)
+        self.sorted_list = sort_dict_results_by_amount_of_occcurs(self.sudden_jump_dict)
+        self.print_results()
+        print('end in da init')
 
-    def start(self):
-        self.get_suddent_jump_results()
+
 
     def get_sudden_jump(self,high_low_ratio_dict, threshold=DEFAULT_THRESHOLD):
         sudden_jumps = []
@@ -53,16 +66,22 @@ class Sudden_jump_detector:
         print("end of counting")
         return sudden_jump_dict
 
-object1 = Sudden_jump_detector
+    def print_results(self):
+        print_sorted_list(self.sorted_list, self.sudden_jump_dict)
 
-list_bittrex = get_cryptocurrency_list_bittrex()
+    def get_object_configuration(self):
+        return("*OBJECT CONFIGURATION* \n"
+               "Coin array: {} \ncoin to: {} \ndate from: {} \ndate to: {} \ninterval: {} \nthreshold: {} \n".format(self.coin_array,self.coin_to,self.date_from,self.date_to,self.interval,self.threshold))
 
-sudden_jump_dict = get_suddent_jump_results(list_bittrex, _threshold=2)
+list_bittrex = get_cryptocurrency_active_list_bittrex()[:10]
 
-mark_end_of_failed_coin()
+object_sudden_jump_results = Sudden_jump_detector(coin_array=list_bittrex, threshold=2)
+object_sudden_jump_results.print_results()
+# print(object_sudden_jump_results.get_object_configuration())
+# print(object_sudden_jump_results.coint_aray)
+# mark_end_of_failed_coin()
 
-sorted_list = sort_dict_results_by_amount_of_occcurs(sudden_jump_dict)
-print_sorted_list(sorted_list, sudden_jump_dict)
+# print_sorted_list(sorted_list, object_sudden_jump_results.sudden_jump_dict)
 
 
 

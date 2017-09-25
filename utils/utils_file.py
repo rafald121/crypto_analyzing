@@ -1,6 +1,6 @@
 from utils.utils_string_cutting import get_from_coin_from_url
 
-failed_coin_file = open('../failed_coinxD', 'w')
+failed_coin_file = open('../failed_coin', 'w')
 print("HAO")
 
 def add_coin_to_file(line):
