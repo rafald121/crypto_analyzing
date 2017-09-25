@@ -18,7 +18,8 @@ def print_date_array_from_epochs(array):
 
 def print_occur_date_with_ratio(list):
     for i in list:
-        print("Date: {}, ratio: {}".format(get_date_from_epoch(i[0]),i[1]))
+        print("Date: {}, ratio: {}".format(get_date_from_epoch(i[0],format=DATE_FORMAT),
+                                            i[1]))
 
 def print_sudden_jump_results(sudden_jump_dict):
     for coin in sudden_jump_dict:
@@ -31,15 +32,13 @@ def print_sudden_jump_results(sudden_jump_dict):
 
 def print_sorted_list(list, sudden_jump_dict):
     print("!!!!SORTED!!!!")
-    print(list)
     for coin in list:
         print("{} with {} occurences: ".format(coin, len(sudden_jump_dict[coin])))
         print_date_array_from_epochs(sudden_jump_dict[coin])
 
 
 def print_sorted_list_with_ratio(list, sudden_jump_dict):
-    print("!!!!SORTED!!!!")
-    print(list)
+    print("!!!!SORTED RATIO!!!!")
     for coin in list:
         print("{} with {} occurences: ".format(coin, len(sudden_jump_dict[coin])))
         print_occur_date_with_ratio(sudden_jump_dict[coin])

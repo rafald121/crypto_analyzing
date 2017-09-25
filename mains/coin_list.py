@@ -41,5 +41,3 @@ def get_cryptocurrency_dict_bittrex():
         COIN_DICT_NAMES[coin['Currency']] = coin['CurrencyLong']
     return COIN_DICT_NAMES
 
-print(len(get_cryptocurrency_list_bittrex()))
-print(len(get_cryptocurrency_active_list_bittrex()))

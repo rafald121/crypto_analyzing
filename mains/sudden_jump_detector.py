@@ -5,7 +5,10 @@ from utils.utils_tables import print_readable_table
 from utils.utils_print import print_date_array_from_epochs, print_sudden_jump_results, print_sorted_list,print_sorted_list_with_ratio
 from utils.utils_file import mark_end_of_failed_coin
 from utils.utils_sudden_jumps import get_dict_of_ratio_high_low, sort_dict_results_by_amount_of_occcurs, sort_dict_results_by_amount_of_occcurs_with_ratio
-
+# TABLIE KILKUWYMIAROWE TO BAZY DANYCH - moze z nich korzystac ?
+# ANT with 1 occurences:
+# Date: 2017.09.04, ratio: 10.06838905775076
+#  przyklad że jak liczy higl/low na swiecy spadkowej to cos przekreca
 class Sudden_jump_detector:
     DEFAULT_COIN_ARRAY = ['BTC','LTC','DMD','LSK']
     DEFAULT_COIN_TO = 'USD'
@@ -35,7 +38,7 @@ class Sudden_jump_detector:
         self.sudden_jump_dict = self.get_suddent_jump_results(coin_array,coin_to,date_from,date_to,interval,threshold)
         # self.sorted_list = sort_dict_results_by_amount_of_occcurs(self.sudden_jump_dict)
         self.sorted_list = sort_dict_results_by_amount_of_occcurs_with_ratio(self.sudden_jump_dict)
-        self.print_results()
+        self.print_results_with_ratio()
 
     def get_sudden_jump(self,high_low_ratio_dict, threshold=DEFAULT_THRESHOLD):
         sudden_jumps = []
@@ -45,16 +48,11 @@ class Sudden_jump_detector:
         return sudden_jumps
 
     def get_sudden_jump_with_ratio(self,high_low_ratio_dict, threshold=DEFAULT_THRESHOLD):
-        print(high_low_ratio_dict)
         sudden_jumps_array = []
-        # sudden_jumps_array.append([])
-        # sudden_jumps_array = []
         for interval in high_low_ratio_dict:
             if float(high_low_ratio_dict[interval]) > float(threshold):
                 ratio = high_low_ratio_dict[interval]
                 sudden_jumps_array.append([interval,ratio])
-        print("qweqwe")
-        print(sudden_jumps_array)
         return sudden_jumps_array
 
     def get_suddent_jump_results(self,
@@ -77,10 +75,11 @@ class Sudden_jump_detector:
             high_low_ratio_dict = get_dict_of_ratio_high_low(coin_historical_data)
             # sudden_jump_dict[coin] = self.get_sudden_jump(high_low_ratio_dict, threshold)
             sudden_jump_dict_with_ratio[coin] = self.get_sudden_jump_with_ratio(high_low_ratio_dict, threshold)
-        return sudden_jump_dict
+        return sudden_jump_dict_with_ratio
 
-    def print_results(self):
-        # print_sorted_list(self.sorted_list, self.sudden_jump_dict)
+    # def print_results(self):
+    #     print_sorted_list(self.sorted_list, self.sudden_jump_dict)
+    def print_results_with_ratio(self):
         print_sorted_list_with_ratio(self.sorted_list, self.sudden_jump_dict)
 
 
@@ -95,11 +94,11 @@ class Sudden_jump_detector:
             str(self._interval[0]),
             self._threshold))
 
-list_bittrex = get_cryptocurrency_active_list_bittrex()[:10]
+list_bittrex = get_cryptocurrency_active_list_bittrex()
 
 object_sudden_jump_results = Sudden_jump_detector(
     coin_array=list_bittrex,
-    threshold=1.5,
+    threshold=5,
     date_from="2017.09.01 13:00:00")
 
 
