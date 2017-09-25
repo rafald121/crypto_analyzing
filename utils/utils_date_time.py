@@ -1,8 +1,8 @@
 import time
 
 CURRENT_EPOCH = round(time.time())
-DATE_FORMAT_TIME = '%Y.%d.%m %H:%M:%S'
-DATE_FORMAT = '%m/%d/%Y'
+DATE_FORMAT_TIME = '%Y.%m.%d %H:%M:%S'
+DATE_FORMAT = '%Y.%m.%d'
 
 INTERVAL_ARRAY = {'M': 'histominute',
                   'H': 'histohour',

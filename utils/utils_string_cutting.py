@@ -9,4 +9,3 @@ def get_from_coin_from_url(url):
         if 'fsym' in p:
             return p.split('=')[1]
 
-print(get_from_coin_from_url(urxl))

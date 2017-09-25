@@ -34,8 +34,11 @@ def get_historical_data(date_from,
     else:
         interval_seconds = get_seconds_from_interval_symbol(interval)
         limit = get_limit_from_datefrom(date_from, date_to, interval=interval_seconds)
-    URL = "https://min-api.cryptocompare.com/data/{}?fsym={}&tsym={}&limit={}&aggregate=1&toTs={}&extraParams=your_app_name"\
+    # URL = "https://min-api.cryptocompare.com/data/{}?fsym={}&tsym={}&limit={}&aggregate=1&toTs={}&extraParams=your_app_name"\
+    #     .format(interval_str, coin_from, coin_to, limit, date_to)
+    URL = "https://min-api.cryptocompare.com/data/{}?fsym={}&tsym={}&limit={}&aggregate=1&toTs={}"\
         .format(interval_str, coin_from, coin_to, limit, date_to)
+
     json_content = get_json_from_url(URL)
     json_data = get_json_array_by_attr(json_content, 'Data')
     return json_data

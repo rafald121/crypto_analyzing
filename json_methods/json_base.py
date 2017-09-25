@@ -3,8 +3,8 @@ import requests
 import time
 # from mains.sudden_jump_detector import add_coin_to_failed
 from utils.utils_string_cutting import get_from_coin_from_url
+from utils.utils_file import add_coin_to_file
 
-failed_coin_file = open('..failed_coin', 'w')
 
 def get_json_from_url(url):
     print("url: {}".format(url))
@@ -19,9 +19,9 @@ def get_json_from_url(url):
             print("ZZzzzz...")
             time.sleep(5)
             print("Was a nice sleep, now let me continue...")
-            failed_coin_file.write(get_from_coin_from_url(url) + '\n')
-            # add_coin_to_failed(get_from_coin_from_url(url))
-            # FAILED_COIN.append(get_from_coin_from_url(url))
+
+            add_coin_to_file(get_from_coin_from_url(url) + '\n')
+
             print("eror for url: {}".format(url))
             continue
         else:

@@ -3,9 +3,9 @@ from mains.coin_list import get_coin_names_array, get_cryptocurrency_list_bittre
 from utils.utils_date_time import get_curr_epoch, get_date_from_epoch, DATE_FORMAT
 from utils.utils_tables import print_readable_table
 from utils.utils_print import print_date_array_from_epochs
-BTC_historical_data = get_historical_data(date_from="2016.04.04 12:30:00",date_to="2017.09.01 12:00:00")
+from utils.utils_file import mark_end_of_failed_coin
 
-
+DEFAULT_FROM_DATE = "2017.08.01 14:20:00"
 
 def get_dict_of_ratio_open_close_candles(json_historical_data):
     open_close_ratio_dict = {}
@@ -44,7 +44,7 @@ def get_sudden_jump(high_low_ratio_dict, threshold = 2.0):
 
 def get_suddent_jump_results(coin_array,
                              _coin_to='USD',
-                             _date_from="2017.20.04 14:20:00",
+                             _date_from=DEFAULT_FROM_DATE,
                              _date_to=get_curr_epoch(),
                              _interval='D',
                              _threshold = 2.0):
@@ -63,6 +63,7 @@ def get_suddent_jump_results(coin_array,
         high_low_avarage = get_avarage_of_ratio(high_low_ratio_dict)
 
         sudden_jump_dict[coin] = get_sudden_jump(high_low_ratio_dict, _threshold)
+    print("end of counting")
     return sudden_jump_dict
 
 def print_sudden_jump_results(sudden_jump_dict):
@@ -75,16 +76,13 @@ def print_sudden_jump_results(sudden_jump_dict):
             print("{} didn't break threshold any time".format(coin))
 
 def sort_dict_results_by_amount_of_occcurs(_dict):
-    # print(_dict)
     dict = _dict.copy()
     sorted_dict = []
     for i in range(0,len(dict)):
         most_occurs = 0
         most_occured_coin = None
         for coin in dict:
-            print(coin)
             if len(dict[coin]) == 0:
-                # print("empty occurs for coin: {}",format(coin))
                 continue
             elif len(dict[coin]) > most_occurs:
                 most_occurs = len(dict[coin])
@@ -113,18 +111,17 @@ def add_coin_to_failed(coin):
     FAILED_COIN.append(coin)
 
 list_bittrex = get_cryptocurrency_list_bittrex()
-# OTHER_URL_ARRAY = ['FSC2', 'BCY', 'IOC', 'APEX']
-
-# list_bittrex_without_bad_url = remove_bad_coin(list_bittrex, OTHER_URL_ARRAY)
 
 sudden_jump_dict = get_suddent_jump_results(list_bittrex, _threshold=2)
+
+# print(sudden_jump_dict)
 # print_sudden_jump_results(sudden_jump_dict)
+
+mark_end_of_failed_coin()
 
 sorted_list = sort_dict_results_by_amount_of_occcurs(sudden_jump_dict)
 print_sorted_list(sorted_list, sudden_jump_dict)
 
 
 
-print("wisienka na torcie:")
-print("failed coin: {}".format(FAILED_COIN))
 
