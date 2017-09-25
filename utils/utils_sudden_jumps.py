@@ -26,6 +26,29 @@ def get_avarage_of_ratio(ratio_dict):
     return sum/len(ratio_dict)
 
 def sort_dict_results_by_amount_of_occcurs(_dict):
+    print('xD')
+    print(_dict)
+    dict = _dict.copy()
+    sorted_dict = []
+    for i in range(0,len(dict)):
+        most_occurs = 0
+        most_occured_coin = None
+        for coin in dict:
+            if len(dict[coin]) == 0:
+                continue
+            elif len(dict[coin]) > most_occurs:
+                most_occurs = len(dict[coin])
+                most_occured_coin = coin
+
+        if most_occured_coin != None:
+            del dict[most_occured_coin]
+            sorted_dict.append(most_occured_coin)
+
+    return sorted_dict
+
+def sort_dict_results_by_amount_of_occcurs_with_ratio(_dict):
+    print('xD')
+    print(_dict)
     dict = _dict.copy()
     sorted_dict = []
     for i in range(0,len(dict)):

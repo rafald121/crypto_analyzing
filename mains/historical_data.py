@@ -86,10 +86,10 @@ class Historical_Data:
             self._interval[0],
             self._limit[0]))
 
-
-
-btc_historical = Historical_Data(date_from="2016.09.04 12:00:00")
-print(btc_historical.get_object_configuration())
-
-
-
+#
+#
+# btc_historical = Historical_Data(date_from="2016.09.04 12:00:00")
+# print(btc_historical.get_object_configuration())
+#
+#
+#
