@@ -75,7 +75,7 @@ def print_sudden_jump_results(sudden_jump_dict):
             print("{} didn't break threshold any time".format(coin))
 
 def sort_dict_results_by_amount_of_occcurs(_dict):
-    print(_dict)
+    # print(_dict)
     dict = _dict.copy()
     sorted_dict = []
     for i in range(0,len(dict)):
@@ -84,7 +84,7 @@ def sort_dict_results_by_amount_of_occcurs(_dict):
         for coin in dict:
             print(coin)
             if len(dict[coin]) == 0:
-                print("empty occurs for coin: {}",format(coin))
+                # print("empty occurs for coin: {}",format(coin))
                 continue
             elif len(dict[coin]) > most_occurs:
                 most_occurs = len(dict[coin])
@@ -108,13 +108,23 @@ def remove_bad_coin(list_whole, bad_coins):
         list_whole.remove(coin)
     return list_whole
 
+FAILED_COIN = []
+def add_coin_to_failed(coin):
+    FAILED_COIN.append(coin)
+
 list_bittrex = get_cryptocurrency_list_bittrex()
 # OTHER_URL_ARRAY = ['FSC2', 'BCY', 'IOC', 'APEX']
+
 # list_bittrex_without_bad_url = remove_bad_coin(list_bittrex, OTHER_URL_ARRAY)
 
 sudden_jump_dict = get_suddent_jump_results(list_bittrex, _threshold=2)
-print_sudden_jump_results(sudden_jump_dict)
+# print_sudden_jump_results(sudden_jump_dict)
 
 sorted_list = sort_dict_results_by_amount_of_occcurs(sudden_jump_dict)
 print_sorted_list(sorted_list, sudden_jump_dict)
+
+
+
+print("wisienka na torcie:")
+print("failed coin: {}".format(FAILED_COIN))
 

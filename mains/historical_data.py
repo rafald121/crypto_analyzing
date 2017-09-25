@@ -1,5 +1,4 @@
 import time
-
 from json_methods.json_base import get_json_from_url, get_json_array_by_attr
 from utils.utils_date_time import get_limit_from_datefrom, get_seconds_from_interval_symbol, \
     get_fullname_from_interval_symbol, get_epoch_from_date
