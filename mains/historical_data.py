@@ -43,3 +43,4 @@ def get_historical_data(date_from,
     json_data = get_json_array_by_attr(json_content, 'Data')
     return json_data
 
+

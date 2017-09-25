@@ -16,3 +16,18 @@ def print_date_array_from_epochs(array):
     for i in array:
         print(get_date_from_epoch(i,format=DATE_FORMAT))
 
+def print_sudden_jump_results(sudden_jump_dict):
+    for coin in sudden_jump_dict:
+        if len(sudden_jump_dict[coin]) != 0:
+            print("Coin: {} broke threshold {} times".format(coin, len(sudden_jump_dict[coin])))
+            for epoch in sudden_jump_dict[coin]:
+                print(get_date_from_epoch(epoch))
+        else:
+            print("{} didn't break threshold any time".format(coin))
+
+def print_sorted_list(list, sudden_jump_dict):
+    print("!!!!SORTED!!!!")
+    print(list)
+    for coin in list:
+        print("{} with {} occurences: ".format(coin, len(sudden_jump_dict[coin])))
+        print_date_array_from_epochs(sudden_jump_dict[coin])
