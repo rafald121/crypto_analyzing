@@ -17,7 +17,7 @@ def get_json_from_url(url):
             print("Connection refused by the server..")
             print("Let me sleep for 5 seconds")
             print("ZZzzzz...")
-            time.sleep(5)
+            time.sleep(2)
             print("Was a nice sleep, now let me continue...")
 
             add_coin_to_file(get_from_coin_from_url(url) + '\n')
