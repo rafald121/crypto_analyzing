@@ -15,14 +15,17 @@ def print_interval(interval):
 def print_interval_with_date(interval):
     print("{} : {}".format(get_date_from_epoch(interval['time']), interval))
 
-def print_date_array_from_epochs(array):
-    for i in array:
-        print(get_date_from_epoch(i,format=DATE_FORMAT))
+def print_occurs_date_from_epochs(array):
+    for occur in array:
+        print(get_date_from_epoch(occur,format=DATE_FORMAT))
 
-def print_occur_date_with_ratio(list):
-    for i in list:
-        print("Date: {}, ratio: {}".format(get_date_from_epoch(i[0],format=DATE_FORMAT),
-                                            i[1]))
+def print_occurs_date_without_ratio(list):
+    for occur in list:
+        print("Date: {}".format(get_date_from_epoch(occur[0],format=DATE_FORMAT)))
+
+def print_occurs_date_with_ratio(list):
+    for occur in list:
+        print("Date: {}, ratio: {}".format(get_date_from_epoch(occur[0],format=DATE_FORMAT),occur[1]))
 
 def print_sudden_jump_results(sudden_jump_dict):
     for coin in sudden_jump_dict:
@@ -33,15 +36,11 @@ def print_sudden_jump_results(sudden_jump_dict):
         else:
             print("{} didn't break threshold any time".format(coin))
 
-def print_sorted_list(list, sudden_jump_dict):
-    print("!!!!SORTED!!!!")
+def print_sorted_list(list, sudden_jump_dict, print_ratio = True):
+    print("!!!!SORTED LIST WITH RATIO!!!!")
     for coin in list:
         print("{} with {} occurences: ".format(coin, len(sudden_jump_dict[coin])))
-        print_date_array_from_epochs(sudden_jump_dict[coin])
-
-def print_sorted_list_with_ratio(list, sudden_jump_dict):
-    print("!!!!SORTED RATIO!!!!")
-    for coin in list:
-        print("{} with {} occurences: ".format(coin, len(sudden_jump_dict[coin])))
-        print_occur_date_with_ratio(sudden_jump_dict[coin])
-        # print("Date: {}, ratio: {}".format(get_date_from_epoch(sudden_jump_dict[])))
+        if print_ratio:
+            print_occurs_date_with_ratio(sudden_jump_dict[coin])
+        else:
+            print_occurs_date_without_ratio(sudden_jump_dict[coin])

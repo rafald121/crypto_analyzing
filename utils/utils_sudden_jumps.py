@@ -1,12 +1,11 @@
-from utils.utils_print import print_interval, print_interval_with_date
-from utils.utils_date_time import get_date_from_epoch
+
 
 def get_dict_of_ratio_open_close_candles(json_historical_data):
     open_close_ratio_dict = {}
     for interval in json_historical_data:
         if interval['low'] == 0:
             break
-        ratio = float(interval['close'])/float(interval['open'])
+        ratio = float(interval['close']) / float(interval['open'])
         open_close_ratio_dict[interval['time']] = ratio
     return open_close_ratio_dict
 
@@ -15,9 +14,7 @@ def get_dict_of_ratio_high_low(json_historical_data):
     for interval in json_historical_data:
         if interval['low'] == 0:
             break
-        ratio = float(interval['high'])/float(interval['low'])
-        print_interval_with_date(interval)
-        print("FOR {} RATIO: {} \n".format((get_date_from_epoch(int(interval['time']))), ratio))
+        ratio = float(interval['high']) / float(interval['low'])
         high_low_ratio_dict[interval['time']] = ratio
     return high_low_ratio_dict
 
@@ -27,15 +24,12 @@ def get_avarage_of_ratio(ratio_dict):
     sum = 0
     for interval in ratio_dict:
         sum += abs(ratio_dict[interval])
-
-    return sum/len(ratio_dict)
+    return sum / len(ratio_dict)
 
 def sort_dict_results_by_amount_of_occcurs(_dict):
-    print('xD')
-    print(_dict)
     dict = _dict.copy()
     sorted_dict = []
-    for i in range(0,len(dict)):
+    for i in range(0, len(dict)):
         most_occurs = 0
         most_occured_coin = None
         for coin in dict:
@@ -44,19 +38,15 @@ def sort_dict_results_by_amount_of_occcurs(_dict):
             elif len(dict[coin]) > most_occurs:
                 most_occurs = len(dict[coin])
                 most_occured_coin = coin
-
         if most_occured_coin != None:
             del dict[most_occured_coin]
             sorted_dict.append(most_occured_coin)
-
     return sorted_dict
 
 def sort_dict_results_by_amount_of_occcurs_with_ratio(_dict):
-    print('xD')
-    print(_dict)
     dict = _dict.copy()
     sorted_dict = []
-    for i in range(0,len(dict)):
+    for i in range(0, len(dict)):
         most_occurs = 0
         most_occured_coin = None
         for coin in dict:
@@ -65,9 +55,8 @@ def sort_dict_results_by_amount_of_occcurs_with_ratio(_dict):
             elif len(dict[coin]) > most_occurs:
                 most_occurs = len(dict[coin])
                 most_occured_coin = coin
-
         if most_occured_coin != None:
             del dict[most_occured_coin]
             sorted_dict.append(most_occured_coin)
-
     return sorted_dict
+
