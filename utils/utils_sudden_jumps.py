@@ -1,3 +1,6 @@
+from utils.utils_print import print_interval, print_interval_with_date
+from utils.utils_date_time import get_date_from_epoch
+
 def get_dict_of_ratio_open_close_candles(json_historical_data):
     open_close_ratio_dict = {}
     for interval in json_historical_data:
@@ -13,6 +16,8 @@ def get_dict_of_ratio_high_low(json_historical_data):
         if interval['low'] == 0:
             break
         ratio = float(interval['high'])/float(interval['low'])
+        print_interval_with_date(interval)
+        print("FOR {} RATIO: {} \n".format((get_date_from_epoch(int(interval['time']))), ratio))
         high_low_ratio_dict[interval['time']] = ratio
     return high_low_ratio_dict
 

@@ -12,6 +12,9 @@ def print_interval(interval):
     for attr in interval:
         print("{}: {}".format(attr, interval[attr]))
 
+def print_interval_with_date(interval):
+    print("{} : {}".format(get_date_from_epoch(interval['time']), interval))
+
 def print_date_array_from_epochs(array):
     for i in array:
         print(get_date_from_epoch(i,format=DATE_FORMAT))
@@ -35,7 +38,6 @@ def print_sorted_list(list, sudden_jump_dict):
     for coin in list:
         print("{} with {} occurences: ".format(coin, len(sudden_jump_dict[coin])))
         print_date_array_from_epochs(sudden_jump_dict[coin])
-
 
 def print_sorted_list_with_ratio(list, sudden_jump_dict):
     print("!!!!SORTED RATIO!!!!")

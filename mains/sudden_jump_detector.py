@@ -77,6 +77,8 @@ class Sudden_jump_detector:
             sudden_jump_dict_with_ratio[coin] = self.get_sudden_jump_with_ratio(high_low_ratio_dict, threshold)
         return sudden_jump_dict_with_ratio
 
+
+
     # def print_results(self):
     #     print_sorted_list(self.sorted_list, self.sudden_jump_dict)
     def print_results_with_ratio(self):
@@ -94,12 +96,14 @@ class Sudden_jump_detector:
             str(self._interval[0]),
             self._threshold))
 
+    
+
 list_bittrex = get_cryptocurrency_active_list_bittrex()
 
 object_sudden_jump_results = Sudden_jump_detector(
-    coin_array=list_bittrex,
-    threshold=5,
-    date_from="2017.09.01 13:00:00")
+    coin_array=['DMD'],
+    threshold=1.5,
+    date_from="2017.05.01 13:00:00")
 
 
 
