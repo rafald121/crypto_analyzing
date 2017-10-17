@@ -84,7 +84,8 @@ list_bittrex = coin_list.get_cryptocurrency_list_bittrex_active()
 object_sudden_jump_results = Sudden_jump_detector(
     coin_array  =list_bittrex,
     threshold   =2,
-    date_from   ="2017.01.01 00:00:00")
+    date_from   ="2017.01.01 00:00:00",
+    interval    ='H')
 
-object_sudden_jump_results.print_results(print_ratio=False)
+object_sudden_jump_results.print_results(print_ratio=True)
 

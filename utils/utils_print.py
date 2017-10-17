@@ -1,4 +1,4 @@
-from utils.utils_date_time import get_curr_epoch, get_date_from_epoch,DATE_FORMAT
+from utils.utils_date_time import get_curr_epoch, get_date_from_epoch,DATE_FORMAT,DATE_FORMAT_TIME
 
 def print_curr_timestamp():
     print (get_curr_epoch())
@@ -21,11 +21,11 @@ def print_occurs_date_from_epochs(array):
 
 def print_occurs_date_without_ratio(list):
     for occur in list:
-        print("Date: {}".format(get_date_from_epoch(occur[0],format=DATE_FORMAT)))
+        print("Date: {}".format(get_date_from_epoch(occur[0],format=DATE_FORMAT_TIME)))
 
 def print_occurs_date_with_ratio(list):
     for occur in list:
-        print("Date: {}, ratio: {}".format(get_date_from_epoch(occur[0],format=DATE_FORMAT),occur[1]))
+        print("Date: {}, ratio: {}".format(get_date_from_epoch(occur[0],format=DATE_FORMAT_TIME),occur[1]))
 
 def print_sudden_jump_results(sudden_jump_dict):
     for coin in sudden_jump_dict:
