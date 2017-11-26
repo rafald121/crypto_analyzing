@@ -2,7 +2,7 @@
 **.pyc
 .idea/*
 .idea/workplace.xml	
-
+utils/__pycache__/*
 utils/__pycache__/utils_tables.cpython-36.pyc
 __pycache__/\.idea/__pycache__\.iml
 
