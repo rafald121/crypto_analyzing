@@ -1,6 +1,7 @@
-from mains.historical_data import Historical_Data
-from mains import coin_list
+from modules.coin_info import coin_list
+from modules.historical_data.historical_data import Historical_Data
 from utils import utils_date_time, utils_print, utils_sudden_jumps
+
 
 class Sudden_jump_detector:
     DEFAULT_COIN_ARRAY = ['BTC','LTC','DMD','LSK']
