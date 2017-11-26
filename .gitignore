@@ -1,4 +1,15 @@
 .DS_STORE
-*.pyc
+**.pyc
 .idea/*
 .idea/workplace.xml	
+
+utils/__pycache__/utils_tables.cpython-36.pyc
+__pycache__/\.idea/__pycache__\.iml
+
+__pycache__/\.idea/inspectionProfiles/profiles_settings\.xml
+
+__pycache__/\.idea/misc\.xml
+
+__pycache__/\.idea/modules\.xml
+
+__pycache__/\.idea/workspace\.xml
